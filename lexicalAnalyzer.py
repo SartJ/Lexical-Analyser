@@ -27,7 +27,8 @@ log_ops = ['==', '!=', '>', '>=', '<', '<=', '&&', '||', '!']
 logical_ops = [] # results 4
 num_val = "^(\d*\.)?\d+$"
 numerical_vals = []  # results 5
-others = [',', ';', '(', ')', '{', '[', ']']
+others = [',', ';', '(', ')', '{', '}', '[', ']']
+others_print = [] #resulst 6
 
 for i in list_of_words:
     if i in reserved_words:
@@ -46,6 +47,9 @@ for i in list_of_words:
     if re.search(num_val, m) and m not in numerical_vals:
         numerical_vals.append(m)
 
+    for n in others:
+        if (n in i) and (n not in others_print):
+            others_print.append(n)
 
 
 identifiers_groomed = [] # results 2
@@ -55,9 +59,15 @@ for i in identifiers:
         identifiers_groomed.append(j)
 
 
-print(numerical_vals)
-
-
-
-
-
+print("Keywords: ", end=" ")
+print( *keywords, sep = ", " )#print(*a, sep = ", ")
+print("identifiers: ", end=" ")
+print( *identifiers_groomed, sep = ", " )
+print("Math Operators: ", end=" ")
+print( *math_operators, sep = ", " )
+print("Logical Operators: ", end=" ")
+print( *logical_ops, sep = ", " )
+print("Numerical Values: ", end=" ")
+print( *numerical_vals, sep = ", " )
+print("Others: ", end=" ")
+print( *others_print, sep = " " )
